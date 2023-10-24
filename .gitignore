@@ -7,3 +7,6 @@ __pycache__
 # ignore the .vscode folder (your personal VS Code settings)
 # .vscode/ 
 # ^^ Keeping this commented out so you can review how I configures the launch.json for the degugger
+
+# Ignore any sqlite databases
+*.db
