@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kekambas Blog</title>
-</head>
-<body>
-    <h1>Hello {{first_name}} {{last_name}} from the templates!</h1>
-    {% if first_name == 'Emili' %}
-        <h3>I am from Sao Paulo, Brazil</h3>
-    {% else %}
-        <h3>Something Interesting</h3>
-    {% endif %}
+{% extends 'base.html' %}
 
-    <p>My fav colors:</p>
-    <ol>
-        {% for color in colors %}
-            <li>{{ color.upper() }}</li>
-        {% endfor %}
-    </ol>
-</body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block header %}
+    <h1>Welcome to the Kekambas Blog</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="col-12">
+        <h5>Posts Will Go Here</h5>
+    </div>
+{% endblock %}
