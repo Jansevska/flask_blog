@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     posts = db.relationship('Post', backref='author')
-    token = db.Column(db.String, index=True, unique=True)
+    token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
 
     def __init__(self, **kwargs):
@@ -38,6 +38,15 @@ class User(db.Model, UserMixin):
         self.token_expiration = now + timedelta(hours=1)
         db.session.commit()
         return self.token
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'email': self.email,
+            'username': self.username,
+    }
     
 @login.user_loader
 def get_user(user_id):
