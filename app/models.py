@@ -72,7 +72,8 @@ class Post(db.Model):
             'id': self.id,
             'title': self.title,
             'body': self.body,
-            'date_created': self.date_created,
-            'user_id': self.user_id,
-            'image_url': self.image_url
+            'dateCreated': self.date_created,
+            'userId': self.user_id,
+            'imageUrl': self.image_url,
+            'author': self.author.to_dict()
         }

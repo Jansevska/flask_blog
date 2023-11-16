@@ -52,6 +52,13 @@ def create_user():
     # return the dictionary/JSON version of the user
     return new_user.to_dict(), 201
 
+# Endpoint to get user based on token
+@api.route('/users/me', methods=["GET"])
+@token_auth.login_required
+def get_me():
+    current_user = token_auth.current_user()
+    return current_user.to_dict()
+
 # Endpoint to get all posts
 @api.route('/posts', methods=["GET"])
 def get_posts():
@@ -87,7 +94,7 @@ def create_post():
     # Get data from the body (we know the data is a dictionary)
     title = data.get('title')
     body = data.get('body')
-    image_url = data.get('image_url')
+    image_url = data.get('imageUrl')
     # Get the user
     current_user = token_auth.current_user()
     
@@ -114,8 +121,11 @@ def edit_post(post_id):
         return {'error': 'You do not have permission to edit this post'}, 403
     data = request.json
     for field in data:
-        if field in {'title', 'body', 'image_url'}:
-            setattr(post, field, data[field])
+        if field in {'title', 'body', 'imageUrl'}:
+            if field == 'imageUrl':
+                setattr(post, 'image_url', data[field])
+            else:
+                setattr(post, field, data[field])
     db.session.commit()
     return post.to_dict()
 
