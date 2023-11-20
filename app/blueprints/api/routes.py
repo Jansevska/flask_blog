@@ -63,7 +63,7 @@ def get_me():
 @api.route('/posts', methods=["GET"])
 def get_posts():
     posts = db.session.execute(db.select(Post)).scalars().all()
-    return [post.to_dict() for post in posts]
+    return {'posts': [post.to_dict() for post in posts] } 
 
 # Endpoint to get a post by ID
 @api.route('/posts/<post_id>')
