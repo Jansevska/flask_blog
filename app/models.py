@@ -1,4 +1,3 @@
-
 import random
 import os
 import base64
@@ -48,6 +47,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
     }
     
+
 @login.user_loader
 def get_user(user_id):
     return db.session.get(User, user_id)
